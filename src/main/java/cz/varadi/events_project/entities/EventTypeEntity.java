@@ -5,21 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "roles")
-@Setter
+@Entity(name = "event_type")
 @Getter
+@Setter
 @NoArgsConstructor
+public class EventTypeEntity {
 
-public class RoleEntity {
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    public long id;
+    private long id;
 
-    @Column(name = "name", unique = true, nullable = false)
-    public String name;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
-    public RoleEntity(String name) {
+    public EventTypeEntity(String name) {
         this.name = name;
     }
 }
