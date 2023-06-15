@@ -37,20 +37,20 @@ public class EventsEntity {
 
     @ManyToOne
     @JoinColumn(name = "event_type_id", nullable = false)
-    private EventTypeEntity eventTypeEntityId;
+    private EventTypeEntity eventTypeEntity;
 
 
     @Column(name = "label", nullable = true)
     private String label;
 
 
-    public EventsEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String description, EventTypeEntity eventTypeEntityId, String label) {
+    public EventsEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String description, EventTypeEntity eventTypeEntity, String label) {
         this.owner = owner;
         this.createdAt = LocalDate.now();
         this.eventDate = eventDate;
         this.eventName = eventName;
         this.description = description;
-        this.eventTypeEntityId = eventTypeEntityId;
+        this.eventTypeEntity = eventTypeEntity;
         this.label = label;
     }
 }
