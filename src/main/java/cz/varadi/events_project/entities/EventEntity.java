@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EventsEntity {
+public class EventEntity {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,7 +44,7 @@ public class EventsEntity {
     private String label;
 
 
-    public EventsEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String description, EventTypeEntity eventTypeEntity, String label) {
+    public EventEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String description, EventTypeEntity eventTypeEntity, String label) {
         this.owner = owner;
         this.createdAt = LocalDate.now();
         this.eventDate = eventDate;
