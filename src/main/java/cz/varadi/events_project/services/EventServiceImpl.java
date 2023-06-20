@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
-public class EventServiceImpl implements EventService{
+public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
 
     @Autowired
@@ -18,7 +19,7 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<EventEntity> getAllEvents() {
+    public List<EventDto> getAllEvents() {
         return eventRepository
                 .findAll()
                 .stream()
@@ -27,13 +28,15 @@ public class EventServiceImpl implements EventService{
     }
 
     public EventDto mapToDto(EventEntity eventEntity) {
-//        return new EventDto(eventEntity.getEventDate(),
-//                eventEntity.getEventName(),
-//                eventEntity.setEventDate(),
-//                eventEntity.getDescription(),
-//                eventEntity.getEventTypeEntity(),
-//                eventEntity.getLabel());
+        return EventDto
+                .builder()
+                .eventDate(eventEntity.getEventDate())
+                .eventName(eventEntity.getEventName())
+                .description(eventEntity.getEventDescription())
+                .eventTypeEntity(eventEntity.getEventTypeEntity())
+                .label(eventEntity.getEventLabel())
+                .build();
 
-return new EventDto();
+
     }
 }
