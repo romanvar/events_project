@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EventsEntity {
+public class EventEntity {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +33,7 @@ public class EventsEntity {
     private String eventName;
 
     @Column(name = "description", nullable = false)
-    private String description;
+    private String eventDescription;
 
     @ManyToOne
     @JoinColumn(name = "event_type_id", nullable = false)
@@ -41,16 +41,16 @@ public class EventsEntity {
 
 
     @Column(name = "label", nullable = true)
-    private String label;
+    private String eventLabel;
 
 
-    public EventsEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String description, EventTypeEntity eventTypeEntity, String label) {
+    public EventEntity(UserEntity owner, LocalDate createdAt, LocalDate eventDate, String eventName, String eventDescription, EventTypeEntity eventTypeEntity, String eventLabel) {
         this.owner = owner;
         this.createdAt = LocalDate.now();
         this.eventDate = eventDate;
         this.eventName = eventName;
-        this.description = description;
+        this.eventDescription = eventDescription;
         this.eventTypeEntity = eventTypeEntity;
-        this.label = label;
+        this.eventLabel = eventLabel;
     }
 }

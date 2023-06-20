@@ -4,7 +4,6 @@ package cz.varadi.events_project.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.util.Set;
 
@@ -29,11 +28,11 @@ public class UserEntity {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "is_active",nullable = false)
+    @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles;
 
 
