@@ -1,7 +1,8 @@
 package cz.varadi.events_project.services;
 
 
-import cz.varadi.events_project.dto.UserDto;
+import cz.varadi.events_project.dto.UserLoginDto;
+import cz.varadi.events_project.dto.UserRegisterDto;
 import cz.varadi.events_project.entities.RoleEntity;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.repositories.RoleRepository;
@@ -23,12 +24,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity registerNewUserAccount(UserDto userDto) {
-        UserEntity user = new UserEntity(userDto.getName(),
-                userDto.getSurname(),userDto.getEmail(),
-                userDto.getPassword());
+    public UserEntity registerNewUserAccount(UserRegisterDto userRegisterDto) {
+        UserEntity user = new UserEntity(userRegisterDto.getName(),
+                userRegisterDto.getSurname(), userRegisterDto.getEmail(),
+                userRegisterDto.getPassword());
         RoleEntity userRole = roleRepository.findByName("user");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity loginUser(UserLoginDto userLoginDto) {
+
+        UserEntity user = new UserEntity(userLoginDto.getEmail(), userLoginDto.getPassword());
+        RoleEntity userRole = roleRepository.getReferenceById(user.getId());
+
+        return null;
     }
 }

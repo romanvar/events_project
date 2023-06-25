@@ -12,8 +12,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 
-public class UserDto {
-
+public class UserRegisterDto {
 
 
     @NotNull
@@ -31,7 +30,6 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-
     private String email;
 
 }

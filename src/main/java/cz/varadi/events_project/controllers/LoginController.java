@@ -1,12 +1,24 @@
 package cz.varadi.events_project.controllers;
 
+import cz.varadi.events_project.dto.UserLoginDto;
+import cz.varadi.events_project.entities.UserEntity;
+import cz.varadi.events_project.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.Valid;
 
 @Controller
 public class LoginController {
+    private final UserService userService;
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -14,15 +26,21 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String processLoginForm(@RequestParam String username, @RequestParam String password) {
-        // TODO: Implement your login logic here
+    public String loginUser(@ModelAttribute("user") @Valid UserLoginDto userLoginDto,
+                            WebRequest request, Model model) {
 
-        if (username.equals("admin") && password.equals("password")) {
+        try {
+
+            UserEntity loggedIn = userService.loginUser(userLoginDto);
             return "redirect:/dashboard";
-        } else {
+
+        } catch (Exception e) {
+            System.out.println(e);
             return "redirect:/login?error";
         }
+
     }
+
 }
 
 

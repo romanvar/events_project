@@ -44,4 +44,9 @@ public class UserEntity {
         this.password = password;
         this.isActive = true;
     }
+
+    public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
