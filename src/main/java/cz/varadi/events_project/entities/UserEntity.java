@@ -3,6 +3,7 @@ package cz.varadi.events_project.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity(name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class UserEntity {
 
@@ -18,13 +20,12 @@ public class UserEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "surname", nullable = false)
     private String surname;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
@@ -36,4 +37,25 @@ public class UserEntity {
     private Set<RoleEntity> roles;
 
 
+    public UserEntity(String name, String surname, String email, String password,Set<RoleEntity> roles) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.isActive = true;
+        this.roles = roles;
+    }
+    public UserEntity(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.isActive = true;
+
+    }
+
+    public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
