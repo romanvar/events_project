@@ -37,12 +37,21 @@ public class UserEntity {
     private Set<RoleEntity> roles;
 
 
+    public UserEntity(String name, String surname, String email, String password,Set<RoleEntity> roles) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.isActive = true;
+        this.roles = roles;
+    }
     public UserEntity(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.isActive = true;
+
     }
 
     public UserEntity(String email, String password) {

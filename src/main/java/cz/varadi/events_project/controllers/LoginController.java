@@ -31,8 +31,12 @@ public class LoginController {
 
         try {
 
-            UserEntity loggedIn = userService.loginUser(userLoginDto);
-            return "redirect:/dashboard";
+            boolean userLogged = userService.loginUser(userLoginDto);
+           if (userLogged  == true) {
+               return "redirect:/dashboard";
+           }else{
+               throw new Exception("Not Logged in") ;
+           }
 
         } catch (Exception e) {
             System.out.println(e);

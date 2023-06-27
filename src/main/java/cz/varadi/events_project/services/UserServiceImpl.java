@@ -7,13 +7,15 @@ import cz.varadi.events_project.entities.RoleEntity;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.repositories.RoleRepository;
 import cz.varadi.events_project.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
@@ -34,11 +36,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity loginUser(UserLoginDto userLoginDto) {
+    @Transactional
+    public boolean loginUser(UserLoginDto userLoginDto) {
 
-        UserEntity user = new UserEntity(userLoginDto.getEmail(), userLoginDto.getPassword());
-        RoleEntity userRole = roleRepository.getReferenceById(user.getId());
+        var userDb = this.userRepository.findByEmail(userLoginDto.getEmail());
 
-        return null;
+        return Objects.equals(userDb.getPassword(),userLoginDto.getPassword());
     }
 }
