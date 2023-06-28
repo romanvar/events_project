@@ -7,5 +7,5 @@ import cz.varadi.events_project.entities.UserEntity;
 public interface UserService {
     UserEntity registerNewUserAccount(UserRegisterDto userRegisterDto);
 
-    boolean loginUser(UserLoginDto userLoginDto);
+    UserEntity findByEmail(String email);
 }

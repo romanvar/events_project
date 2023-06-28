@@ -25,26 +25,6 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginUser(@ModelAttribute("user") @Valid UserLoginDto userLoginDto,
-                            WebRequest request, Model model) {
-
-        try {
-
-            boolean userLogged = userService.loginUser(userLoginDto);
-           if (userLogged  == true) {
-               return "redirect:/dashboard";
-           }else{
-               throw new Exception("Not Logged in") ;
-           }
-
-        } catch (Exception e) {
-            System.out.println(e);
-            return "redirect:/login?error";
-        }
-
-    }
-
 }
 
 

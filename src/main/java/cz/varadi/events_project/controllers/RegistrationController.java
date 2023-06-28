@@ -4,6 +4,7 @@ package cz.varadi.events_project.controllers;
 import cz.varadi.events_project.dto.UserRegisterDto;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.services.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,10 @@ public class RegistrationController {
 
     private final UserService userService;
 
-    public RegistrationController(UserService userService) {
+    private final PasswordEncoder passwordEncoder;
+    public RegistrationController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/user/registration")
@@ -35,7 +38,13 @@ public class RegistrationController {
             @ModelAttribute("user") @Valid UserRegisterDto userRegisterDto,
             WebRequest request, Model model) {
 
+        if (!userRegisterDto.getPassword().equals(userRegisterDto.getMatchingPassword())) {
+            model.addAttribute("message", "Passwords do not match.");
+            return "registration";
+        }
         try {
+            userRegisterDto.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
+            userRegisterDto.setMatchingPassword(userRegisterDto.getPassword());
             UserEntity registered = userService.registerNewUserAccount(userRegisterDto);
         } catch (Exception uaeEx) {
             model.addAttribute("message", "An account for that username/email already exists.");
