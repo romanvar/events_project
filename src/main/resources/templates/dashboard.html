@@ -6,6 +6,14 @@
 </head>
 <body>
 <h2>Dashboard</h2>
-<div>Ahoj</div>
+<ul>
+    <li th:each="event : ${eventsTempl}">
+        <div th:text="${event.getEventDate()}" class="event-date"></div>
+        <div th:text="${event.getEventName()}" class="event-name"></div>
+        <div th:text="${event.getDescription()}" class="event-desc"></div>
+
+
+    </li>
+</ul>
 </body>
 </html>

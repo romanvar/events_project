@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         UserEntity user = new UserEntity(userRegisterDto.getName(),
                 userRegisterDto.getSurname(), userRegisterDto.getEmail(),
                 userRegisterDto.getPassword());
-        RoleEntity userRole = roleRepository.findByName("user");
+        RoleEntity userRole = roleRepository.findByName("USER");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         return userRepository.save(user);
     }
