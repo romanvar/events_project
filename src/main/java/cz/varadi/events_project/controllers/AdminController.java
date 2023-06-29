@@ -16,7 +16,7 @@ public class AdminController {
 
 
     @GetMapping("/admin")
-    public String dashboardPage(Model model, Authentication authentication) {
+    public String adminPage(Model model, Authentication authentication) {
 
 //        var events = AdminService.getUserList();
 //        model.addAttribute("eventsTempl", events);
