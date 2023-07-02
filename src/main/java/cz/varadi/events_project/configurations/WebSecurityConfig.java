@@ -30,29 +30,33 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/user/registration", "/css/**", "/js/**")
-                            .permitAll()
+                        .permitAll()
                         .requestMatchers("/dashboard", "/events")
-                            .authenticated()
-                )
-                .formLogin(form -> form
-                    .loginPage("/login")
-                    .usernameParameter("email")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/dashboard")
-                    .failureUrl("/login?error=true")
-                    .permitAll()
-                ).logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
+                        .authenticated()
+
+                ).formLogin(form -> form
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/dashboard")
+                        .failureUrl("/login?error=true")
+
+                        .permitAll()
+                ).logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll());
 
         return http.build();
     }
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(15);
+        System.out.println("passwordEncoder");
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(15);
+        return passwordEncoder;
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(PasswordEncoder passwordEncoder){
+    public AuthenticationManager authenticationManager(PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);

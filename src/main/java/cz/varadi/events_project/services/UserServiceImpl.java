@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
         RoleEntity userRole = roleRepository.findByName("USER");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         return userRepository.save(user);
+
     }
 
     @Override
