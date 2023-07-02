@@ -33,8 +33,7 @@ public class WebSecurityConfig {
                             .permitAll()
                         .requestMatchers("/dashboard", "/events")
                             .authenticated()
-                )
-                .formLogin(form -> form
+                ).formLogin(form -> form
                     .loginPage("/login")
                     .usernameParameter("email")
                     .passwordParameter("password")
@@ -48,7 +47,9 @@ public class WebSecurityConfig {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(15);
+        System.out.println("passwordEncoder");
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(15);
+        return passwordEncoder;
     }
 
     @Bean
