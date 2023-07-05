@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                         .permitAll()
                         .requestMatchers("/dashboard", "/events")
                         .authenticated()
-                        .requestMatchers(",/admin").hasRole("ADMIN")
+                        .requestMatchers("/admin").hasRole("ADMIN")
 
                 ).formLogin(form -> form
                         .loginPage("/login")
