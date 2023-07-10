@@ -18,8 +18,8 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminPage(Model model, Authentication authentication) {
         System.out.println("AdminController");
-//        var events = AdminService.getUserList();
-//        model.addAttribute("eventsTempl", events);
+        var users = AdminService.getUserList();
+//        model.addAttribute("users", users);
 
         return "admin";
     }
