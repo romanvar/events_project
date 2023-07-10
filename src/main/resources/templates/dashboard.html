@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +18,9 @@
 
     </li>
 </ul>
-<a href="admin">Admin access</a>
+
+<!--Link will be visible only to admins-->
+<div sec:authorize="hasRole('ADMIN')"><a href="admin">Admin access</a></div>
+
 </body>
 </html>

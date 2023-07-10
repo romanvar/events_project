@@ -22,8 +22,8 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-        String errorMessage = "Login Failed voe";
-        model.addAttribute("errorMessage", errorMessage);
+//        String errorMessage = "Login Failed";
+//        model.addAttribute("errorMessage", errorMessage);
 
         return "login";
     }
