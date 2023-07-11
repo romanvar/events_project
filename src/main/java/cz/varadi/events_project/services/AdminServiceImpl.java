@@ -1,6 +1,7 @@
 package cz.varadi.events_project.services;
 
 import cz.varadi.events_project.dto.UserAdministrationDto;
+import cz.varadi.events_project.dto.UserChangeDto;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,12 @@ public class AdminServiceImpl implements AdminService {
     public UserAdministrationDto getUser(Long id) {
         var user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return mapToDto(user);
+    }
+
+    @Override
+    public UserEntity changeUserAccount(UserChangeDto userChangeDto) {
+//        UserEntity user = userRepository.findById(userChangeDto.getId());
+
+        return null;
     }
 }

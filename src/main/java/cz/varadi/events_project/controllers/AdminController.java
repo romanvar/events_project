@@ -1,14 +1,18 @@
 package cz.varadi.events_project.controllers;
 
-import cz.varadi.events_project.services.AdminService;
+import cz.varadi.events_project.dto.UserChangeDto;
+import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.services.AdminServiceImpl;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.Valid;
 
 @Controller
 public class AdminController {
@@ -35,8 +39,14 @@ public class AdminController {
     }
 
     @PostMapping("/admin/{id}")
-    public String changeUserPage(Long id, Model model, Authentication authentication) {
+    public String changeUserPage(@ModelAttribute("user") @Valid UserChangeDto userChangeDto, WebRequest request, Long id, Model model) {
+        try {
+            System.out.println("Post Mapping - changeUserPage");
+            UserEntity user = adminService.changeUserAccount(userChangeDto);
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return "change-user";
     }
 }

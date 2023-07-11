@@ -6,5 +6,30 @@
 </head>
 <body>
 <h2>Please change user data</h2>
+
+<form action="/change-user" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label for="FirstName">first</label>
+        <input id="FirstName" th:field="*{name}"/>
+        <p th:each="error: ${#fields.errors('name')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="LastName">last</label>
+        <input id="LastName" th:field="*{surname}"/>
+        <p th:each="error : ${#fields.errors('surname')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input id="email" type="email" th:field="*{email}"/>
+        <p th:each="error : ${#fields.errors('email')}"
+           th:text="${error}">Validation error</p>
+    </div>
+
+
+
+    <button class="btn btn-primary">Submit</button>
+</form>
 </body>
 </html>
