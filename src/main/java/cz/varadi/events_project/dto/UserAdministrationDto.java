@@ -1,11 +1,11 @@
 package cz.varadi.events_project.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class UserAdministrationDto {
 
