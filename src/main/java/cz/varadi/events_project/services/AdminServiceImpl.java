@@ -13,4 +13,9 @@ public class AdminServiceImpl implements AdminService {
         return new ArrayList<UserEntity>();
 
     }
+
+    @Override
+    public UserEntity getUser(Integer id) {
+        return getUser(id);
+    }
 }
