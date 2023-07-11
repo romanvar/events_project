@@ -7,7 +7,7 @@
 <body>
 <h2>Please change user data</h2>
 
-<form action="/change-user" th:object="${user}" method="POST" enctype="utf8">
+<form th:action="@{'/admin/' + ${user.id}}" th:object="${user}" method="POST" enctype="utf8">
     <div>
         <label for="FirstName">first</label>
         <input id="FirstName" th:field="*{name}"/>
