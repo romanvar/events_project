@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,15 +9,18 @@
 <h2>Dashboard</h2>
 <ul>
     <li th:each="event : ${eventsTempl}">
+        <div th:text="${event.getEventTypeEntity().getName()}" class="event-type"> Event Type </div>
         <div th:text="${event.getEventDate()}" class="event-date"></div>
         <div th:text="${event.getEventName()}" class="event-name"></div>
         <div th:text="${event.getDescription()}" class="event-desc"></div>
-        <div th:text="${event.getEventTypeEntity()}" class="event-type"></div>
         <div th:text="${event.getLabel()}" class="event-label"></div>
 
 
     </li>
 </ul>
-<a href="admin">Admin access</a>
+
+<!--Link will be visible only to admins-->
+<div sec:authorize="hasRole('ADMIN')"><a href="admin">Admin access</a></div>
+
 </body>
 </html>

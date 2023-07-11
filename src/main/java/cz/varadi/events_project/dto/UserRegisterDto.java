@@ -30,6 +30,7 @@ public class UserRegisterDto {
 
     @NotNull
     @NotEmpty
+
     private String email;
 
 }
