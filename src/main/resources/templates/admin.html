@@ -5,7 +5,15 @@
     <title>Admin Console</title>
 </head>
 <body>
+<ul>
+    <li th:each="user : ${users}"><a th:href="@{'/admin/' + ${user.id}}">
+        <div th:text="${user.name}" class="user-name"></div>
+        <div th:text="${user.surname}" class="user-surname"></div>
+        <div th:text="${user.email}" class="user-email"></div>
+    </a>
 
+    </li>
+</ul>
 
 
 </body>

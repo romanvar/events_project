@@ -8,8 +8,9 @@ import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
-    public static List<UserEntity> getUserList() {
+    @Override
+    public List<UserEntity> getUserList() {
         return new ArrayList<UserEntity>();
+
     }
 }

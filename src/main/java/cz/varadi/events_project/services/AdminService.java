@@ -5,7 +5,7 @@ import cz.varadi.events_project.entities.UserEntity;
 import java.util.List;
 
 public interface AdminService {
-    public static List<UserEntity> getUserList() {
-        return null;
-    }
+    public  List<UserEntity> getUserList();
+
+    UserEntity getUser(Integer id);
 }
