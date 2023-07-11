@@ -3,7 +3,9 @@ package cz.varadi.events_project.services;
 import cz.varadi.events_project.dto.UserAdministrationDto;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.repositories.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +39,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserEntity getUser(Integer id) {
-        return getUser(id);
+    public UserAdministrationDto getUser(Long id) {
+        var user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return mapToDto(user);
     }
 }

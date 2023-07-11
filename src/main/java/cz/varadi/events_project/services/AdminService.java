@@ -8,5 +8,5 @@ import java.util.List;
 public interface AdminService {
     public List<UserAdministrationDto> getUserList();
 
-    UserEntity getUser(Integer id);
+    UserAdministrationDto getUser(Long id);
 }

@@ -28,14 +28,14 @@ public class AdminController {
     }
 
     @GetMapping("/admin/{id}")
-    public String getUserPage(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+    public String getUserPage(@PathVariable("id") Long id, Model model, Authentication authentication) {
         var users = adminService.getUser(id);
         model.addAttribute("user", users);
         return "change-user";
     }
 
     @PostMapping("/admin/{id}")
-    public String changeUserPage(Integer id, Model model, Authentication authentication) {
+    public String changeUserPage(Long id, Model model, Authentication authentication) {
 
         return "change-user";
     }
