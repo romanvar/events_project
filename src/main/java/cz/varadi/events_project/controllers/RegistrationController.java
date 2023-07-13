@@ -20,6 +20,7 @@ public class RegistrationController {
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
+
     public RegistrationController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;

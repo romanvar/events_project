@@ -1,23 +1,33 @@
 package cz.varadi.events_project.services;
 
-import cz.varadi.events_project.dto.UserAdministrationDto;
+import cz.varadi.events_project.dto.RoleDto;
+import cz.varadi.events_project.dto.UserDto;
+import cz.varadi.events_project.entities.RoleEntity;
 import cz.varadi.events_project.entities.UserEntity;
+import cz.varadi.events_project.repositories.RoleRepository;
 import cz.varadi.events_project.repositories.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public AdminServiceImpl(UserRepository userRepository) {
+    public AdminServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
-    public List<UserAdministrationDto> getUserList() {
+    public List<UserDto> getUserList() {
         return userRepository
                 .findAll()
                 .stream()
@@ -26,18 +36,50 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
-    private UserAdministrationDto mapToDto(UserEntity userEntity) {
-        return UserAdministrationDto.builder()
+    @Override
+    public List<RoleDto> getAllRoles() {
+        return roleRepository.findAll().stream()
+                .map(role -> RoleDto.builder()
+                        .id(role.id)
+                        .name(role.name)
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private UserDto mapToDto(UserEntity userEntity) {
+        return UserDto.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
                 .surname(userEntity.getSurname())
                 .email(userEntity.getEmail())
+                .roles(userEntity.getRoles().stream().map(
+                      role -> RoleDto.builder()
+                              .id(role.id)
+                              .name(role.name)
+                              .build()
+                ).collect(Collectors.toSet()))
                 .build();
 
     }
 
     @Override
-    public UserEntity getUser(Integer id) {
-        return getUser(id);
+    public UserDto getUser(Long id) {
+        var user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return mapToDto(user);
+    }
+
+    @Override
+    public UserEntity changeUserAccount(UserDto userDto) {
+        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
+        user.setSurname(userDto.getSurname());
+
+        RoleEntity userRole = roleRepository.findByName("USER");
+        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+
+
+        userRepository.save(user);
+        return user;
     }
 }

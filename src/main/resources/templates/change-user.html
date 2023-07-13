@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>change-user</title>
+</head>
+<body>
+<h2>Please change user data</h2>
+
+<form th:action="@{'/admin/' + ${user.id}}" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label for="FirstName">first</label>
+        <input id="FirstName" th:field="*{name}"/>
+        <p th:each="error: ${#fields.errors('name')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="LastName">last</label>
+        <input id="LastName" th:field="*{surname}"/>
+        <p th:each="error : ${#fields.errors('surname')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input id="email" type="email" th:field="*{email}"/>
+        <p th:each="error : ${#fields.errors('email')}"
+           th:text="${error}">Validation error</p>
+    </div>
+
+    <ul th:each="role: ${roles}" >
+        <li>
+            <label th:for="@{'role-'+${role.id}}" th:text="${role.name}"></label>
+            <input th:id="@{'role-'+${role.id}}" type="checkbox" th:value="@{user.getRoles().contains(${role})}" th:field="*{requestedRoles}">
+<!--            <input th:id="@{'role-'+${role.id}}" type="checkbox" th:checked="@{user.getRoles().contains(${role})}" th:field="*{roles}">-->
+        </li>
+    </ul>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+</body>
+</html>

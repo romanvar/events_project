@@ -17,7 +17,7 @@ spring:
         enable_lazy_load_no_trans: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
   devtools:
     livereload:
