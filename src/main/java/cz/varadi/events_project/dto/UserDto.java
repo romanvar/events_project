@@ -1,16 +1,17 @@
 package cz.varadi.events_project.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
-@Getter
-@Setter
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-public class UserChangeDto {
+@ToString
+public class UserDto {
     @NotNull
     @NotEmpty
     private long id;
@@ -23,4 +24,9 @@ public class UserChangeDto {
     @NotNull
     @NotEmpty
     private String email;
+    @NotNull
+    @NotEmpty
+    private Set<RoleDto> roles;
+
+    private String[] requestedRoles;
 }

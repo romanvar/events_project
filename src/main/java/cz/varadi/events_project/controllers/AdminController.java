@@ -1,6 +1,6 @@
 package cz.varadi.events_project.controllers;
 
-import cz.varadi.events_project.dto.UserChangeDto;
+import cz.varadi.events_project.dto.UserDto;
 import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.services.AdminServiceImpl;
 import org.springframework.security.core.Authentication;
@@ -33,16 +33,18 @@ public class AdminController {
 
     @GetMapping("/admin/{id}")
     public String getUserPage(@PathVariable("id") Long id, Model model, Authentication authentication) {
-        var users = adminService.getUser(id);
-        model.addAttribute("user", users);
+        var user = adminService.getUser(id);
+        model.addAttribute("user", user);
+        var roles = adminService.getAllRoles();
+        model.addAttribute("roles", roles);
         return "change-user";
     }
 
     @PostMapping("/admin/{id}")
-    public String changeUserPage(@ModelAttribute("user") @Valid UserChangeDto userChangeDto, WebRequest request, Long id, Model model) {
+    public String changeUserPage(@ModelAttribute("user") @Valid UserDto userDto, WebRequest request, Long id, Model model) {
         try {
-            System.out.println("Post Mapping - changeUserPage");
-            UserEntity user = adminService.changeUserAccount(userChangeDto);
+
+            UserEntity user = adminService.changeUserAccount(userDto);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

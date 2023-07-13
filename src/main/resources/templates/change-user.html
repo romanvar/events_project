@@ -27,7 +27,13 @@
            th:text="${error}">Validation error</p>
     </div>
 
-
+    <ul th:each="role: ${roles}" >
+        <li>
+            <label th:for="@{'role-'+${role.id}}" th:text="${role.name}"></label>
+            <input th:id="@{'role-'+${role.id}}" type="checkbox" th:value="@{user.getRoles().contains(${role})}" th:field="*{requestedRoles}">
+<!--            <input th:id="@{'role-'+${role.id}}" type="checkbox" th:checked="@{user.getRoles().contains(${role})}" th:field="*{roles}">-->
+        </li>
+    </ul>
 
     <button class="btn btn-primary">Submit</button>
 </form>

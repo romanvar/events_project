@@ -1,15 +1,17 @@
 package cz.varadi.events_project.services;
 
-import cz.varadi.events_project.dto.UserAdministrationDto;
-import cz.varadi.events_project.dto.UserChangeDto;
+import cz.varadi.events_project.dto.RoleDto;
+import cz.varadi.events_project.dto.UserDto;
 import cz.varadi.events_project.entities.UserEntity;
 
 import java.util.List;
 
 public interface AdminService {
-    public List<UserAdministrationDto> getUserList();
+    public List<UserDto> getUserList();
 
-    UserAdministrationDto getUser(Long id);
+    List<RoleDto> getAllRoles();
 
-    UserEntity changeUserAccount(UserChangeDto userChangeDto);
+    UserDto getUser(Long id);
+
+    UserEntity changeUserAccount(UserDto userDto);
 }
