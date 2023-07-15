@@ -3,12 +3,11 @@ server:
   error:
     path: /errorsup
 
-
 spring:
   datasource:
     url: jdbc:postgresql://db.jezgxwgyhoahidqbtyia.supabase.co:5432/postgres
     username: postgres
-    password: Chk8bS74im9lRzZd
+    password: UAKUVdMeKV2Rxiv0
   jpa:
     properties:
       hibernate:
@@ -16,7 +15,7 @@ spring:
         format_sql: true
         enable_lazy_load_no_trans: true
     hibernate:
-      ddl-auto: update
+      ddl-auto:  update
     show-sql: false
 
   devtools:
