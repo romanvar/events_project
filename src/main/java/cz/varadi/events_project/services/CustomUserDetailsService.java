@@ -26,7 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         try {
             var user = userService.findByEmail(email);
-            System.out.println("Found user: " + user.getEmail());
             return buildUserForAuthentication(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -42,7 +41,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.withUsername(user.getEmail())
                 .password(user.getPassword())
                 .roles(roles)
-
                 .build();
     }
 
