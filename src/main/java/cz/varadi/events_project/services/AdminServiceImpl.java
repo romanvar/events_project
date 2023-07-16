@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,10 +53,10 @@ public class AdminServiceImpl implements AdminService {
                 .surname(userEntity.getSurname())
                 .email(userEntity.getEmail())
                 .roles(userEntity.getRoles().stream().map(
-                      role -> RoleDto.builder()
-                              .id(role.id)
-                              .name(role.name)
-                              .build()
+                        role -> RoleDto.builder()
+                                .id(role.id)
+                                .name(role.name)
+                                .build()
                 ).collect(Collectors.toSet()))
                 .build();
 
@@ -75,9 +75,18 @@ public class AdminServiceImpl implements AdminService {
         user.setEmail(userDto.getEmail());
         user.setSurname(userDto.getSurname());
 
-        RoleEntity userRole = roleRepository.findByName("USER");
-        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+        RoleEntity userRole;
+        Set<RoleEntity> rolesTmp = new HashSet<>();
 
+
+        for (int i = 0; i < userDto.getRequestedRoles().length; i++) {
+            int q = i + 1;
+            Long count = (long) q;
+            userRole = roleRepository.getReferenceById(count);
+            rolesTmp.add(userRole);
+
+        }
+        user.setRoles(rolesTmp);
 
         userRepository.save(user);
         return user;
