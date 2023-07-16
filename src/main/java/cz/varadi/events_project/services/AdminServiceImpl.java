@@ -4,6 +4,7 @@ import cz.varadi.events_project.dto.RoleDto;
 import cz.varadi.events_project.dto.UserDto;
 import cz.varadi.events_project.entities.RoleEntity;
 import cz.varadi.events_project.entities.UserEntity;
+import cz.varadi.events_project.exceptions.UserNotFoundException;
 import cz.varadi.events_project.repositories.RoleRepository;
 import cz.varadi.events_project.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -64,13 +65,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public UserDto getUser(Long id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
         return mapToDto(user);
     }
 
     @Override
     public UserEntity changeUserAccount(UserDto userDto) {
-        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new UserNotFoundException("User not found");
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setSurname(userDto.getSurname());
