@@ -71,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public UserEntity changeUserAccount(UserDto userDto) {
-        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found");
+        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found"));
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setSurname(userDto.getSurname());
