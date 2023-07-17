@@ -65,13 +65,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public UserDto getUser(Long id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found"));
+        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException( "User Not Found"));
         return mapToDto(user);
     }
 
     @Override
     public UserEntity changeUserAccount(UserDto userDto) {
-        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found"));
+        UserEntity user = userRepository.findById(userDto.getId()).orElseThrow(() -> new UserNotFoundException("User Not Found"));
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setSurname(userDto.getSurname());
