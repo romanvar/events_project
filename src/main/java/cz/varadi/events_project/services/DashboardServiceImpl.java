@@ -3,6 +3,7 @@ package cz.varadi.events_project.services;
 import cz.varadi.events_project.dto.EventDto;
 import cz.varadi.events_project.entities.EventEntity;
 import cz.varadi.events_project.entities.UserEntity;
+import cz.varadi.events_project.exceptions.UserNotFoundException;
 import cz.varadi.events_project.repositories.EventRepository;
 import cz.varadi.events_project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public List<EventDto> getMyEvents(String username) {
-        UserEntity user = userRepository.findByEmail(username);
+        UserEntity user = userRepository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("User not found!!"));
         return eventRepository
                 .findAllByOwner(user)
                 .stream()
