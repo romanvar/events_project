@@ -4,6 +4,7 @@ package cz.varadi.events_project.services;
 import cz.varadi.events_project.dto.UserRegisterDto;
 import cz.varadi.events_project.entities.RoleEntity;
 import cz.varadi.events_project.entities.UserEntity;
+import cz.varadi.events_project.exceptions.UserNotFoundException;
 import cz.varadi.events_project.repositories.RoleRepository;
 import cz.varadi.events_project.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity findByEmail(String email) {
-        return this.userRepository.findByEmail(email);
+        return this.userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 }
