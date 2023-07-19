@@ -49,6 +49,6 @@ public class AdminController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "change_confirmation";
+        return "change-confirmation";
     }
 }
