@@ -7,9 +7,7 @@ import cz.varadi.events_project.entities.UserEntity;
 import cz.varadi.events_project.exceptions.UserNotFoundException;
 import cz.varadi.events_project.repositories.RoleRepository;
 import cz.varadi.events_project.repositories.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -49,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     private UserDto mapToDto(UserEntity userEntity) {
-        Stream<String> requestedRolesStream = userEntity.getRoles().stream().map(role -> ""+role.id);
+        Stream<String> requestedRolesStream = userEntity.getRoles().stream().map(role -> "" + role.id);
         String[] requestedRoles = requestedRolesStream.toArray(size -> new String[size]);
         return UserDto.builder()
                 .id(userEntity.getId())
@@ -69,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public UserDto getUser(Long id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException( "User Not Found"));
+        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
         return mapToDto(user);
     }
 
@@ -84,11 +82,11 @@ public class AdminServiceImpl implements AdminService {
         Set<RoleEntity> rolesTmp = new HashSet<>();
 
 
-        for (int i = 0; i < userDto.getRequestedRoles().length; i++) {
-            int q = i + 1;
-            Long count = (long) q;
-            userRole = roleRepository.getReferenceById(count);
+        for (String roleTmp : userDto.getRequestedRoles()) {
+            Long idLong = Long.valueOf(roleTmp);
+            userRole = roleRepository.getReferenceById(Long.valueOf(roleTmp));
             rolesTmp.add(userRole);
+
 
         }
         user.setRoles(rolesTmp);
