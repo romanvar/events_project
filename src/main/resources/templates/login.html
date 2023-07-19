@@ -22,7 +22,7 @@
     </table>
 
     <div th:if="${param.error != null}">
-        <p>User not found</p>
+        <p style="color:red">User not found</p>
     </div>
 
     <div class="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
