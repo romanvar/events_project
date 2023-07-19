@@ -6,8 +6,10 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 
 public class RoleDto {
     private long id;
+    @EqualsAndHashCode.Exclude
     private String name;
 }

@@ -29,4 +29,8 @@ public class UserDto {
     private Set<RoleDto> roles;
 
     private String[] requestedRoles;
+
+    public boolean hasRoleById(long id) {
+        return roles.stream().anyMatch(role -> role.getId() == id);
+    }
 }
