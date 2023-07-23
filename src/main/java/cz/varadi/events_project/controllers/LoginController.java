@@ -23,10 +23,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-//        String errorMessage = "Login Failed";
-//        model.addAttribute("errorMessage", errorMessage);
-//        throw new UserNotFoundException("user nebyl nalezen");
-
+//        var user = userService.findByEmail(model.)
         return "login";
     }
 
