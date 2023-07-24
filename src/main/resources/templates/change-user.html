@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>change-user</title>
@@ -39,6 +39,13 @@
 
         </li>
     </ul>
+
+<p>
+    <label>
+        <label for="isActive">Is Active</label>
+        <input id="isActive" type="checkbox" th:checked="${user.isActive()}"/>
+<!--        <input id="isActive" type="checkbox" th:value="${user.isActive() ? true : false}" th:field="@{isActive}"/>-->
+    </label></p>
 
     <button class="btn btn-primary">Submit</button>
 </form>
