@@ -28,6 +28,8 @@ public class UserDto {
     @NotEmpty
     private Set<RoleDto> roles;
 
+    private boolean isActive;
+
     private String[] requestedRoles;
 
     public boolean hasRoleById(long id) {

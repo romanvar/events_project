@@ -20,4 +20,8 @@ public class UserLoginDto {
     @NotNull
     @NotEmpty
     private String password;
+
+    @NotNull
+    @NotEmpty
+    private boolean isActive;
 }
