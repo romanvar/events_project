@@ -27,6 +27,7 @@ public class AdminController {
     public String adminPage(Model model, Authentication authentication) {
 
         var users = adminService.getUserList();
+
         model.addAttribute("users", users);
         return "admin";
     }
