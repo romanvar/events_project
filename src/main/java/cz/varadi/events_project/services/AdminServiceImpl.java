@@ -54,6 +54,7 @@ public class AdminServiceImpl implements AdminService {
                 .name(userEntity.getName())
                 .surname(userEntity.getSurname())
                 .email(userEntity.getEmail())
+                .isActive(userEntity.isActive())
                 .roles(userEntity.getRoles().stream().map(
                         role -> RoleDto.builder()
                                 .id(role.id)
@@ -77,6 +78,7 @@ public class AdminServiceImpl implements AdminService {
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setSurname(userDto.getSurname());
+        user.setActive(userDto.isActive());
 
         RoleEntity userRole;
         Set<RoleEntity> rolesTmp = new HashSet<>();

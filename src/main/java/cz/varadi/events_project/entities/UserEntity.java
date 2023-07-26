@@ -58,4 +58,8 @@ public class UserEntity {
         this.email = email;
         this.password = password;
     }
+
+    public boolean isActive() {
+        return this.isActive;
+    }
 }

@@ -6,7 +6,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,5 +36,13 @@ public class UserDto {
 
     public boolean hasRoleById(long id) {
         return roles.stream().anyMatch(role -> role.getId() == id);
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean getIsActive(){
+        return isActive;
     }
 }
