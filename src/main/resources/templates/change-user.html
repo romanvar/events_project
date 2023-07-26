@@ -11,7 +11,7 @@
 <body>
 <h2>Please change user data</h2>
 
-<form th:action="@{'/admin/' + ${user.id}}" th:object="${user}" method="POST" enctype="utf8">
+<form th:action="@{'/admin/' + ${user.id}}" th:object="${user}" method="POST" enctype="utf-8">
     <div>
         <label for="FirstName">firstname</label>
         <input id="FirstName" th:field="*{name}"/>
@@ -41,11 +41,16 @@
     </ul>
 
 <p>
-    <label>
-        <label for="isActive">Is Active</label>
-        <input id="isActive" type="checkbox" th:checked="${user.isActive()}"/>
+
+        <label th:for="isActive" th:text="'isActive'">Is Active</label>
+<!--        <input type="checkbox" th:checked="checked" th:value="*{isActive}"/>-->
+    <input th:id="isActive" type="checkbox" th:checked="${user.isActive()}" th:field="*{isActive}">
+<!--    <input th:id="isActive" type="checkbox" th:checked="checked" >-->
+
+<!--        <input id="isActive" type="checkbox" name="isActive" th:checked="checked" th:value="true"/>-->
+<!--        <input id="isActive" type="checkbox" th:checked="${user.isActive()}"/>-->
 <!--        <input id="isActive" type="checkbox" th:value="${user.isActive() ? true : false}" th:field="@{isActive}"/>-->
-    </label></p>
+    </p>
 
     <button class="btn btn-primary">Submit</button>
 </form>
