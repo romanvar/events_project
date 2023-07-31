@@ -39,4 +39,9 @@ public class EventServiceImpl implements EventService {
 
 
     }
+    public boolean addEvent(){
+
+
+        return true;
+    }
 }

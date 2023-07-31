@@ -20,4 +20,6 @@ public class EventController {
         model.addAttribute("eventsTempl", events);
         return "events";
     }
+
+
 }
