@@ -20,25 +20,18 @@
     </div>
     <div>
         <label for="eventDescription">Event Description</label>
-        <input id="eventDescription" th:field="*{description}"/>
-        <p th:each="error : ${#fields.errors('surname')}"
+        <input id="eventDescription" th:field="description"/>
+        <p th:each="error : ${#fields.errors('description')}"
            th:text="${error}">Validation error</p>
     </div>
     <div>
         <label for="eventDate">Event Date</label>
-        <input id="eventDate" type="email" th:field="*{eventDate}"/>
+        <input id="eventDate" type="email" th:field="eventDate"/>
         <p th:each="error : ${#fields.errors('eventDate')}"
            th:text="${error}">Validation error</p>
     </div>
 
-    <ul th:each="role: ${roles}">
-        <li>
-            <label th:for="@{'role-'+${role.id}}" th:text="${role.name}"></label>
-            <input th:id="@{'role-'+${role.id}}" type="checkbox"
-                   th:field="*{requestedRoles}" th:value="${role.id}">
 
-        </li>
-    </ul>
 
 
 
