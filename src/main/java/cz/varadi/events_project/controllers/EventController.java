@@ -4,6 +4,7 @@ import cz.varadi.events_project.services.EventServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 
@@ -21,5 +22,15 @@ public class EventController {
         return "events";
     }
 
+    @GetMapping("/event")
+    public String eventPage(Model model){
 
+        return "event";
+    }
+
+    @PostMapping("/event")
+    public String addEvent(Model model){
+
+        return "event-add-confirmation";
+    }
 }
